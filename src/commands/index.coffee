@@ -14,7 +14,7 @@ commands =
 	keys:  new ShowKeys()
 	ls:    new Inspect()
 	quit:  new ExitProcess()
-  print: new Print()
+	print: new Print()
 
 commands.help = new Help(commands)
 
