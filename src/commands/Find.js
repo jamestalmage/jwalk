@@ -61,5 +61,7 @@ Fp.run = function(context, args, callback){
 
   callback();
 
-}
+};
+
+module.exports = Find;
 
