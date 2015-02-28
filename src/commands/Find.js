@@ -31,15 +31,17 @@ Fp.run = function(context, args, callback){
   }
   var typeName = args[0];
   var type = n[typeName];
-  if(type) {
+  if(!type) {
     console.log(typeName.yellow + ' is not a known Node Type'.red);
+    callback();
+    return;
   }
   var found = false;
 
   types.visit(context.pointer, {
     visitNode:function(path){
       if(found) return false;
-      if(type.check(path)){
+      if(type.check(path.node)){
         found = true;
         var newPointer = path.node;
         while(path.node !== context.pointer){
@@ -62,6 +64,30 @@ Fp.run = function(context, args, callback){
   callback();
 
 };
+ /*
+function buildSteps(args, steps){
+  if(!args.length) return steps || null;
+  args = args.slice();
+  steps = steps | [];
+  var typeName = args.shift();
+  var type = n[typeName];
+  if(!type) {
+    console.log(typeName.yellow + ' is not a valid Node Type'.red);
+    return null;
+  }
+  if(hasLeadingNumArg(args)){
+    while(hasLeadingNumArg(args)){
+      steps.push([type, parseInt(args.shift())]);
+    }
+  } else {
+    steps.push([type,0]);
+  }
+  return buildSteps(args, steps);
+}
+
+function hasLeadingNumArg(args){
+  return args.length && !isNaN(args[0]);
+}    */
 
 module.exports = Find;
 
