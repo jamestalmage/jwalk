@@ -4,6 +4,7 @@ ExitProcess = require './ExitProcess'
 Help        = require './Help'
 ShowKeys    = require './ShowKeys'
 Inspect     = require './Inspect'
+Print       = require './Print'
 
 commands =
 	cd:    new ChangePath()
@@ -13,6 +14,7 @@ commands =
 	keys:  new ShowKeys()
 	ls:    new Inspect()
 	quit:  new ExitProcess()
+  print: new Print()
 
 commands.help = new Help(commands)
 
