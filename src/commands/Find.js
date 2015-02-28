@@ -1,4 +1,4 @@
-var Command = require('./Commmand');
+var Command = require('./Command');
 var _ = require('underscore');
 var recast = require('recast');
 var types = recast.types;
