@@ -5,6 +5,7 @@ Help        = require './Help'
 ShowKeys    = require './ShowKeys'
 Inspect     = require './Inspect'
 Print       = require './Print'
+Find        = require './Find'
 
 commands =
 	cd:    new ChangePath()
@@ -15,6 +16,7 @@ commands =
 	ls:    new Inspect()
 	quit:  new ExitProcess()
 	print: new Print()
+	find:  new Find()
 
 commands.help = new Help(commands)
 
