@@ -10,4 +10,4 @@ class Print extends Command
 		console.log(recast.print(context.pointer).code)
 		callback()
 
-module.exports = Inspect
+module.exports = Print
