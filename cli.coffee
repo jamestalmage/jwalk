@@ -10,7 +10,7 @@ prompt = require './src/prompt'
 HOME = if process.platform is 'win32' then process.env['USERPROFILE'] else process.env['HOME']
 
 if process.argv.length < 3
-	console.log "usage: jwalk <filename>"
+	console.log "usage: ast-walk <filename>"
 	process.exit(1)
 
 filename = process.argv[2]
@@ -18,8 +18,8 @@ if !fs.existsSync(filename)
 	console.log "File not found: #{filename}"
 	process.exit(1)
 
-if fs.existsSync("#{HOME}/.jwalk")
-	config = JSON.parse fs.readFileSync("#{HOME}/.jwalk")
+if fs.existsSync("#{HOME}/.ast-walk")
+	config = JSON.parse fs.readFileSync("#{HOME}/.ast-walk")
 
 loader.load filename, (err, tree) ->
 	if err?

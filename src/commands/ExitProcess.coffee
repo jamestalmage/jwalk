@@ -3,7 +3,7 @@ Command = require './Command'
 class ExitProcess extends Command
 
 	help: ->
-		'quit jwalk'
+		'quit ast-walk'
 
 	run: (context, args, callback) ->
 		console.log 'kbye'

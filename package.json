@@ -1,14 +1,14 @@
 {
-	"name": "jwalk",
+	"name": "ast-walk",
 	"version": "0.0.4",
-	"description": "command-line json inspector",
+	"description": "command-line ast inspector",
 	"preferGlobal": "true",
 	"repository": {
 		"type": "git",
-		"url": "http://github.com/nkohari/jwalk"
+		"url": "http://github.com/jamestalmage/jwalk"
 	},
 	"bin": {
-		"jwalk": "bin/jwalk"
+		"ast-walk": "bin/ast-walk"
 	},
 	"dependencies": {
 		"coffee-script": "1.4.0",

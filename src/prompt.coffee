@@ -42,7 +42,7 @@ exports.run = (tree, config = {}) ->
 
 	showPrompt = ->
 		tokens = [
-			'jwalk'
+			'ast-walk'
 			getTypeAtPointer(context.pointer)
 			'/' + context.path.join('/')
 			'$ '
