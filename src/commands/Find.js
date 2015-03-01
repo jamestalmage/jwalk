@@ -26,29 +26,48 @@ Fp.autocomplete = function(context, str, callback) {
 };
 
 Fp.run = function(context, args, callback){
-  if(!args.length) {
-    console.log('You must supply an Node Type'.red);
-  }
-  var typeName = args[0];
-  var type = n[typeName];
-  if(!type) {
-    console.log(typeName.yellow + ' is not a known Node Type'.red);
+  var steps = buildSteps(args);
+  if(!steps) {
+    console.log('You must supply an valid Node Type'.red);
     callback();
     return;
   }
-  var found = false;
 
-  types.visit(context.pointer, {
+  var path = [];
+  var newNode = walk(context.pointer, path, steps);
+
+  if(!newNode){
+    console.log('Nothing found for that path'.red);
+  }
+  else {
+    context.pointer = newNode;
+    context.path = context.path.concat(path);
+  }
+  callback();
+};
+
+function walk(node, jwalkPath, steps){
+  if(!steps.length || !node) return node;
+
+  var step = steps.shift();
+  var type = step[0];
+  var count = step[1];
+  var foundNode = null;
+
+  types.visit(node, {
     visitNode:function(path){
-      if(found) return false;
+      if(count < 0) return false;
       if(type.check(path.node)){
-        found = true;
-        var newPointer = path.node;
-        while(path.node !== context.pointer){
-          context.path.push(path.parentPath.name, path.name);
-          path = path.parent;
+        count --;
+        if(count < 0){
+          var pathPart = [];
+          foundNode = walk(path.node, pathPart, steps);
+          while(path.node !== node){
+            pathPart.unshift( path.name);
+            path = path.parentPath;
+          }
+          jwalkPath.push.apply(jwalkPath,pathPart);
         }
-        context.pointer = newPointer;
         return false;
       } else {
         this.traverse(path);
@@ -57,18 +76,13 @@ Fp.run = function(context, args, callback){
     }
   });
 
-  if(!found){
-    console.log(typeName.yellow + ' not found'.red);
-  }
+  return foundNode;
+}
 
-  callback();
-
-};
- /*
 function buildSteps(args, steps){
   if(!args.length) return steps || null;
   args = args.slice();
-  steps = steps | [];
+  steps = steps || [];
   var typeName = args.shift();
   var type = n[typeName];
   if(!type) {
@@ -87,7 +101,7 @@ function buildSteps(args, steps){
 
 function hasLeadingNumArg(args){
   return args.length && !isNaN(args[0]);
-}    */
+}
 
 module.exports = Find;
 
