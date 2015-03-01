@@ -3,6 +3,7 @@
 fs = require 'fs'
 path = require 'path'
 zlib = require 'zlib'
+recast = require 'recast'
 
 filesize = require 'filesize'
 
@@ -14,7 +15,7 @@ updateLoadingDisplay = (loaded, done) ->
 parse = (json, callback) ->
 	console.log " └ parsing..."
 	start   = Date.now()
-	tree    = JSON.parse(json)
+	tree    = recast.parse(json)
 	elapsed = (Date.now() - start) / 1000
 	console.log "#{CLEAR} └ parsed in:    #{elapsed}s\n"
 	callback(null, tree)
