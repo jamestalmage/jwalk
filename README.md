@@ -8,6 +8,9 @@ to parse them. You can also provide ast's (potentially from other parsers) via c
 This project is a fork of [jwalk](https://github.com/nkohari/jwalk) which provides essentially the same
 utility for large JSON objects.
 
+Before using this project, you definitely want to check out esprimas [online parser demo](http://esprima.org/demo/parse.html).
+You may find it easier to use, and all you need.
+
 ## Installation
 
 More documentation (and fewer bugs) coming soon. In the meantime, install it via npm:
